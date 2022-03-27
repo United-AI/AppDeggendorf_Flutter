@@ -1,4 +1,7 @@
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/weather/current_weather.dart';
 import 'package:flutter/material.dart';
+
+import 'bottom_navigation_bar_buttons/forum/forum.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,17 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Deggendorf App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'DeggApp'),
@@ -32,15 +26,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -48,77 +33,98 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _selectedIndex = 0;
 
-  void _incrementCounter() {
+  /*
+  Here is the list where the widgets for the bottom navigation bar are
+  The list starts at index zero
+  An exception has yet to be implemented which will be triggered whenever there
+  is not enough widget for the number of buttons
+   */
+  static const List<Widget> _widgetOptions = <Widget>[
+    //Index: 0
+    CurrentWeather(),
+    //Index: 1,
+    SecondRoute(),
+    //Index: 2,
+    Forum(),
+    //Index: 3
+    SecondRoute(),
+    //Index: 4
+    SecondRoute()
+  ];
+
+  void _onItemTapped(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      /*
+      Here is where the magic takes place :)
+      Each of the navigation bar item has an index starting from 0
+      This index is used to refer to a list and call widgets
+       */
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      body: Column(
-        children: [
-          MenuButton(title: "Wetter", iconData: Icons.ac_unit),
-          MenuButton(title: "Karte", iconData: Icons.location_on),
-          MenuButton(title: "Nachrichten", iconData: Icons.new_releases_sharp),
-          MenuButton(title: "Events", iconData: Icons.alternate_email)
+      /*
+      From here are the bottom navigation bar's buttons
+      Each button has an icon, a label and a colour, each of which are optional
+       */
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alternate_email),
+            label: 'Event',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.accessibility_sharp),
+            label: 'Forum',
+            backgroundColor: Colors.purple,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Konto',
+            backgroundColor: Colors.brown,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Einstellung',
+            backgroundColor: Colors.pink,
+          ),
         ],
-
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-class MenuButton extends StatefulWidget {
-  const MenuButton({Key? key,
-  required this.title,
-    required this.iconData,
-  }) : super(key: key);
-
-  final String title;
-  final IconData iconData;
-
-  @override
-  State<MenuButton> createState() => _MenuButtonState();
-}
-
-class _MenuButtonState extends State<MenuButton> {
-  void _incrementCounter() async{
-    setState(() {
-    });
-  }
+/*
+This is a default route shown wherever a page is not developed yet
+ */
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-            child: Row(
-              children: <Widget>[
-                Icon(widget.iconData, color: Colors.blue, size: 30,),
-                Text("  " + widget.title, style: TextStyle(fontSize: 25, color: Colors.black),)
-
-              ],
-            ),
-          )
-        ],
-      )
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: const Center(
+          child: Text("Diese Seite wurde noch nicht entwickelt!!!")),
     );
   }
 }
-
