@@ -2,6 +2,7 @@ import 'package:deggendorf_app/bottom_navigation_bar_buttons/weather/current_wea
 import 'package:flutter/material.dart';
 
 import 'bottom_navigation_bar_buttons/forum/forum.dart';
+import 'bottom_navigation_bar_buttons/settings/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Index: 3
     SecondRoute(),
     //Index: 4
-    SecondRoute()
+    SettingScreen(),
   ];
 
   void _onItemTapped(int index) {
