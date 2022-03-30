@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'bottom_navigation_bar_buttons/forum/forum.dart';
 import 'bottom_navigation_bar_buttons/profile/profile.dart';
+import 'bottom_navigation_bar_buttons/profile/profile.dart';
 import 'bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
 
 void main() {
