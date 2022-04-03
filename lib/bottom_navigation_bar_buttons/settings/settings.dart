@@ -40,7 +40,12 @@ class DropdownSettingButton extends StatefulWidget {
 
 class _DropdownSettingButtonState extends State<DropdownSettingButton> {
   bool _expanded = false;
-  String currentCity = "Deggendorf";
+  String currentCity = "None";
+
+  String getCurrentCity(){
+    getCurrentCityFromSharedPreferences();
+    return currentCity;
+  }
 
   getCurrentCityFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -64,9 +69,9 @@ class _DropdownSettingButtonState extends State<DropdownSettingButton> {
             isExpanded: _expanded,
             headerBuilder: (context, isExpanded){
               return ListTile(
-                title: Text(currentCity,
-                    style: TextStyle(fontSize: 22, color: Color.fromRGBO(
-                        1, 1, 1, 0.49411764705882355))
+                title: Text("Die aktuelle Stadt: " + getCurrentCity(),
+                    style: TextStyle(fontSize: 20, color: Color.fromRGBO(
+                        1, 1, 1, 0.5))
                 ),
               );
             },
@@ -81,8 +86,9 @@ class _DropdownSettingButtonState extends State<DropdownSettingButton> {
                       });
                     },
                     child: Text(
-                      "Deggendorf", style: TextStyle(fontSize: 20, color: Color.fromRGBO(
-                        1, 1, 1, 0.49411764705882355)),
+                      "Deggendorf",
+                      style: TextStyle(fontSize: 20, color: Color.fromRGBO(
+                        1, 1, 1, 0.5)),
                     )
                 ),
                 TextButton(
@@ -94,8 +100,9 @@ class _DropdownSettingButtonState extends State<DropdownSettingButton> {
                       });
                     },
                     child: Text(
-                      "Plattling", style: TextStyle(fontSize: 20, color: Color.fromRGBO(
-                        1, 1, 1, 0.49411764705882355)),
+                      "Plattling",
+                      style: TextStyle(fontSize: 20, color: Color.fromRGBO(
+                        1, 1, 1, 0.5)),
                     )
                 ),
               ],
@@ -179,12 +186,12 @@ class _StandardSettingButtonState extends State<StandardSettingButton> {
                 Text(
                   widget.title,
                   style: TextStyle(fontSize: 25, color: Color.fromRGBO(
-                      1, 1, 1, 0.49411764705882355)),
+                      1, 1, 1, 0.5)),
                 ),
                 Text(
                   "drücken um das ${widget.title} zu ändern",
                   style: TextStyle(fontSize: 10, color: Color.fromRGBO(
-                      1, 1, 1, 0.3764705882352941)),
+                      1, 1, 1, 0.37)),
                 )
               ],
             ),
@@ -193,7 +200,7 @@ class _StandardSettingButtonState extends State<StandardSettingButton> {
             ),
             Icon(
               Icons.keyboard_arrow_right_rounded,
-              color: Color.fromRGBO(1, 1, 1, 0.49411764705882355),
+              color: Color.fromRGBO(1, 1, 1, 0.5),
               size: 40,
             )
           ],
