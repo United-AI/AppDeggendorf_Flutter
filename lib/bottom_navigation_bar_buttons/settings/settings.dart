@@ -40,7 +40,7 @@ class DropdownSettingButton extends StatefulWidget {
 
 class _DropdownSettingButtonState extends State<DropdownSettingButton> {
   bool _expanded = false;
-  String currentCity = "None";
+  String currentCity = "Die aktuelle Stadt";
 
   String getCurrentCity(){
     getCurrentCityFromSharedPreferences();
@@ -68,8 +68,9 @@ class _DropdownSettingButtonState extends State<DropdownSettingButton> {
             canTapOnHeader: true,
             isExpanded: _expanded,
             headerBuilder: (context, isExpanded){
+              String city = getCurrentCity();
               return ListTile(
-                title: Text("Die aktuelle Stadt: " + getCurrentCity(),
+                title: Text(city,
                     style: TextStyle(fontSize: 20, color: Color.fromRGBO(
                         1, 1, 1, 0.5))
                 ),
