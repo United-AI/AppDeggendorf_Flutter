@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +42,15 @@ class _DropdownSettingButtonState extends State<DropdownSettingButton> {
   bool _expanded = false;
   String currentCity = "Deggendorf";
 
-  void setCurrentCity(bool isDeg){
-    if (isDeg){
-      currentCity = "Deggendorf";
-    }else{
-      currentCity = "Plattling";
-    }
+  getCurrentCityFromSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String val = prefs.getString('currentCity') ?? "Not Selected";
+    currentCity = val;
+  }
+
+  setCurrentCityInSharedPreferences(String newCity) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('currentCity', newCity);
   }
 
 
@@ -55,44 +60,46 @@ class _DropdownSettingButtonState extends State<DropdownSettingButton> {
       animationDuration: Duration(microseconds: 2000),
       children:[
         ExpansionPanel(
-          canTapOnHeader: true,
-          isExpanded: _expanded,
-          headerBuilder: (context, isExpanded){
-            return ListTile(
-              title: Text("Aktuelle Stadt: ${currentCity}",
-              style: TextStyle(fontSize: 22, color: Color.fromRGBO(
-                  1, 1, 1, 0.49411764705882355))
-              ),
-            );
-          },
-          body: Column(
-            children: <Widget> [
-              TextButton(
-                onPressed: (){
-                  setCurrentCity(true);
-                  _expanded = false;
-                  setState(() {
-                  });
-                },
-                child: Text(
-                  "Deggendorf", style: TextStyle(fontSize: 20, color: Color.fromRGBO(
-                    1, 1, 1, 0.49411764705882355)),
-                )
-              ),
-              TextButton(
-                onPressed: (){
-                  setCurrentCity(false);
-                  _expanded = false;
-                  setState(() {
-                  });
-                },
-                child: Text(
-                    "Plattling", style: TextStyle(fontSize: 20, color: Color.fromRGBO(
-                    1, 1, 1, 0.49411764705882355)),
-                )
-              ),
-            ],
-          )
+            canTapOnHeader: true,
+            isExpanded: _expanded,
+            headerBuilder: (context, isExpanded){
+              return ListTile(
+                title: Text(currentCity,
+                    style: TextStyle(fontSize: 22, color: Color.fromRGBO(
+                        1, 1, 1, 0.49411764705882355))
+                ),
+              );
+            },
+            body: Column(
+              children: <Widget> [
+                TextButton(
+                    onPressed: (){
+                      setCurrentCityInSharedPreferences("Deggendorf");
+                      _expanded = false;
+                      getCurrentCityFromSharedPreferences();
+                      setState(() {
+                      });
+                    },
+                    child: Text(
+                      "Deggendorf", style: TextStyle(fontSize: 20, color: Color.fromRGBO(
+                        1, 1, 1, 0.49411764705882355)),
+                    )
+                ),
+                TextButton(
+                    onPressed: (){
+                      setCurrentCityInSharedPreferences("Plattling");
+                      _expanded = false;
+                      getCurrentCityFromSharedPreferences();
+                      setState(() {
+                      });
+                    },
+                    child: Text(
+                      "Plattling", style: TextStyle(fontSize: 20, color: Color.fromRGBO(
+                        1, 1, 1, 0.49411764705882355)),
+                    )
+                ),
+              ],
+            )
         )
       ],
       expansionCallback: (panelIndex, isExpanded){
