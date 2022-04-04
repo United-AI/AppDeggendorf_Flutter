@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -90,16 +89,23 @@ class _ProfileEntryState extends State<ProfileEntry> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 5, 70, 5),
-          child: Text(
-            widget.category,
-            textAlign: TextAlign.center,
+        Expanded(
+          flex: 30,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
+            child: Text(
+              widget.category + ":",
+              textAlign:  TextAlign.right,
+                  
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
-          child: Text(widget.description, textAlign: TextAlign.center),
+        Expanded(
+          flex: 70,
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+            child: Text(widget.description),
+          ),
         )
       ],
     );
