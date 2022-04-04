@@ -59,7 +59,7 @@ class _ProfilePage extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ProfileEntry(
-                    category: "Name", description: "A very long example Name"),
+                    category: "Name", description: "Very long example Name"),
                 ProfileEntry(category: "Age", description: "123"),
                 ProfileEntry(category: "Birthday", description: "30.02.")
               ],
