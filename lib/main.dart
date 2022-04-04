@@ -1,7 +1,8 @@
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/weather/current_weather.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'bottom_navigation_bar_buttons/forum/forum.dart';
+import 'bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
    */
   static const List<Widget> _widgetOptions = <Widget>[
     //Index: 0
-    CurrentWeather(),
+    HomePage(),
     //Index: 1,
     SecondRoute(),
     //Index: 2,
