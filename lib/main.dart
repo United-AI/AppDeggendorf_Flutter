@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'bottom_navigation_bar_buttons/forum/forum.dart';
 import 'bottom_navigation_bar_buttons/profile/profile.dart';
-import 'bottom_navigation_bar_buttons/settings/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Index: 2,
     Forum(),
     //Index: 3
-    SecondRoute(),
+    Profile(),
     //Index: 4
   ];
 
