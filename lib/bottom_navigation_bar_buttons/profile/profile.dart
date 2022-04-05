@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -61,7 +62,7 @@ class _ProfilePage extends State<Profile> {
                 ProfileEntry(
                     category: "Name", description: "Very long example Name"),
                 ProfileEntry(category: "Age", description: "123"),
-                ProfileEntry(category: "Birthday", description: "30.02.")
+                ProfileEntry(category: "Birthday", description: "12.34.")
               ],
             ),
           )
@@ -87,27 +88,31 @@ class ProfileEntry extends StatefulWidget {
 class _ProfileEntryState extends State<ProfileEntry> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 30,
-          child: Container(
-            padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
-            child: Text(
-              widget.category + ":",
-              textAlign:  TextAlign.right,
-                  
+    return TextButton(
+      onPressed: () {  },
+      style: TextButton.styleFrom(primary: Colors.brown),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 30,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
+              child: Text(
+                widget.category + ":",
+                textAlign:  TextAlign.right,
+                    
+              ),
             ),
           ),
-        ),
-        Expanded(
-          flex: 70,
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
-            child: Text(widget.description),
-          ),
-        )
-      ],
+          Expanded(
+            flex: 70,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+              child: Text(widget.description),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
