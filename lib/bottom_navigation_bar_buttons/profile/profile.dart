@@ -1,0 +1,124 @@
+
+import 'package:flutter/material.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/settings/settings.dart';
+
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePage createState() => _ProfilePage();
+}
+
+/*
+profile Page
+ */
+
+class _ProfilePage extends State<Profile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Konto'),
+        actions: <Widget>[
+          IconButton(onPressed:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingScreen()),
+            );
+          }, icon: Icon(Icons.settings))
+        ],
+        backgroundColor: Colors.brown,
+      ),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(30),
+            child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.brown, shape: BoxShape.rectangle),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    "Example Username",
+                    maxLines: 2,
+                    textScaleFactor: 2,
+                    textAlign: TextAlign.center,
+                  ),
+                )),
+          ),
+          Container(
+              alignment: Alignment.center,
+              decoration:
+                  BoxDecoration(color: Colors.brown, shape: BoxShape.circle),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.brown,
+                  backgroundImage:
+                      AssetImage('assets/defaultProfilePicture.png'),
+                ),
+              )),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ProfileEntry(
+                    category: "Name", description: "Very long example Name"),
+                ProfileEntry(category: "Age", description: "123"),
+                ProfileEntry(category: "Birthday", description: "12.34.")
+              ],
+            ),
+          )
+        ],
+      ),
+
+      //const Center(child: Text("Diese Seite wurde noch nicht entwickelt!!!")),
+    );
+  }
+}
+
+class ProfileEntry extends StatefulWidget {
+  var category;
+  var description;
+
+  ProfileEntry({Key? key, required this.category, required this.description})
+      : super(key: key);
+
+  @override
+  _ProfileEntryState createState() => _ProfileEntryState();
+}
+
+class _ProfileEntryState extends State<ProfileEntry> {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {  },
+      style: TextButton.styleFrom(primary: Colors.brown),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 30,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
+              child: Text(
+                widget.category + ":",
+                textAlign:  TextAlign.right,
+                    
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 70,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+              child: Text(widget.description),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

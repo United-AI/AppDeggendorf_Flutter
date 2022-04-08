@@ -1,7 +1,10 @@
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/weather/current_weather.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'bottom_navigation_bar_buttons/forum/forum.dart';
+import 'bottom_navigation_bar_buttons/profile/profile.dart';
+import 'bottom_navigation_bar_buttons/profile/profile.dart';
+import 'bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,15 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
    */
   static const List<Widget> _widgetOptions = <Widget>[
     //Index: 0
-    CurrentWeather(),
+    HomePage(),
     //Index: 1,
     SecondRoute(),
     //Index: 2,
     Forum(),
     //Index: 3
-    SecondRoute(),
+    Profile(),
     //Index: 4
-    SecondRoute()
   ];
 
   void _onItemTapped(int index) {
@@ -71,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+
       /*
       From here are the bottom navigation bar's buttons
       Each button has an icon, a label and a colour, each of which are optional
@@ -96,11 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.account_circle),
             label: 'Konto',
             backgroundColor: Colors.brown,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Einstellung',
-            backgroundColor: Colors.pink,
           ),
         ],
         currentIndex: _selectedIndex,
