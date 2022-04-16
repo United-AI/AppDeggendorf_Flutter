@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -28,14 +29,29 @@ class _ImageSlidesState extends State<ImageSlides> {
   Widget build(BuildContext context) {
     return
       CarouselSlider(
-        options: CarouselOptions(height: 230.0),
+        options: CarouselOptions(
+          height: 180.0,
+          enlargeCenterPage: true,
+          autoPlay: true,
+          aspectRatio: 16 / 9,
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enableInfiniteScroll: true,
+          autoPlayAnimationDuration: Duration(seconds: 5),
+          viewportFraction: 0.8,
+        ),
         items: assetsImages.map((item) =>
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black26, width: 10,),
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              //image: DecorationImage(image: AssetImage(item), fit: BoxFit.contain, alignment: Alignment.center)
             ),
             //child: Image.network(item, fit: BoxFit.cover, width: 1000,)
-            child: Image.asset(item),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(item), fit: BoxFit.contain, alignment: Alignment.center)
+              ),
+            )
           )
         ).toList()
       );
