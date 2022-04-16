@@ -5,6 +5,7 @@ import 'bottom_navigation_bar_buttons/forum/forum.dart';
 import 'bottom_navigation_bar_buttons/profile/profile.dart';
 import 'bottom_navigation_bar_buttons/profile/profile.dart';
 import 'bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
+import 'bottom_navigation_bar_buttons/event/barwidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Index: 0
     HomePage(),
     //Index: 1,
-    SecondRoute(),
+    BarWidget(barName: "Erster International"),
     //Index: 2,
     Forum(),
     //Index: 3
