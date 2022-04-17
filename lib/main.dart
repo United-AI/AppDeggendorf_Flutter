@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Index: 0
     HomePage(),
     //Index: 1,
-    BarWidget(barName: "Erster International"),
+    BarWidget(barName: "Internationale Abreiterassoziation"),
     //Index: 2,
     Forum(),
     //Index: 3

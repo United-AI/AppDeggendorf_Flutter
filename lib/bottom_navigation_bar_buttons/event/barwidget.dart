@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/imageslides.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/infobox_text.dart';
 
 
 class BarWidget extends StatefulWidget {
@@ -17,6 +18,7 @@ class _BarWidgetState extends State<BarWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text(
           "Bar: ${widget.barName}", style: TextStyle(fontSize: 20, color: Colors.white),
         ),
@@ -26,12 +28,15 @@ class _BarWidgetState extends State<BarWidget> {
         child: Column(
           children: [
             ImageSlides(),
+            InfoBox(),
           ],
         )
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        backgroundColor: Colors.green,
+        child: Icon(Icons.qr_code_scanner),
+      )
     );
   }
 }
-
-
-

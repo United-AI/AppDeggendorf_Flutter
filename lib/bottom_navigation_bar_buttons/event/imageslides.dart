@@ -42,7 +42,7 @@ class _ImageSlidesState extends State<ImageSlides> {
         items: assetsImages.map((item) =>
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26, width: 10,),
+              border: Border.all(color: Colors.lightGreen, width: 10,),
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
               //image: DecorationImage(image: AssetImage(item), fit: BoxFit.contain, alignment: Alignment.center)
             ),
