@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/settings/settings.dart';
+
+import '../settings/settings.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -20,12 +20,15 @@ class _ProfilePage extends State<Profile> {
       appBar: AppBar(
         title: const Text('Konto'),
         actions: <Widget>[
-          IconButton(onPressed:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SettingScreen()),
-            );
-          }, icon: Icon(Icons.settings))
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingScreen()),
+                );
+              },
+              icon: Icon(Icons.settings))
         ],
         backgroundColor: Colors.brown,
       ),
@@ -95,7 +98,7 @@ class _ProfileEntryState extends State<ProfileEntry> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {  },
+      onPressed: () {},
       style: TextButton.styleFrom(primary: Colors.brown),
       child: Row(
         children: [
@@ -105,8 +108,7 @@ class _ProfileEntryState extends State<ProfileEntry> {
               padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
               child: Text(
                 widget.category + ":",
-                textAlign:  TextAlign.right,
-                    
+                textAlign: TextAlign.right,
               ),
             ),
           ),

@@ -1,6 +1,5 @@
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/list_of_widgets_for_home_page.dart';
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
-import 'package:deggendorf_app/main.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/homepage%20manager/list_of_widgets_for_home_page.dart';
+import 'package:deggendorf_app/bin/main.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,8 +21,6 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  List<int> bottom = <int>[0];
-
   @override
   Widget build(BuildContext context) {
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
@@ -71,23 +68,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               (BuildContext context, int index) {
                 return new InkWell(
                     onTap: () {
-                      if (index == 0) {
                         //If the widget tapped is the weather widget, then open weather page :)
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CurrentWeather()),
-                        );
-                      }
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  new MyList(context).myListToBeTappedOn[index],
+                            ));
                     },
                     child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20)),
                       height: 125,
-                      child: new MyList(context).myList[index],
+                      child: new MyList(context).myListToBeDisplayed[index],
                     ));
               },
-              childCount: new MyList(context).myList.length,
+              childCount: new MyList(context).myListToBeDisplayed.length,
             ),
           ),
         ],

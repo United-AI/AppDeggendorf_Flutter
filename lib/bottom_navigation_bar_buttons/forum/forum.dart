@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../main.dart';
+import '../../bin/main.dart';
 
 class Forum extends StatefulWidget {
   const Forum({Key? key}) : super(key: key);

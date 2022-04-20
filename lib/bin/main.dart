@@ -1,10 +1,11 @@
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/home_page.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/event.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/homepage%20manager/home_page.dart';
 import 'package:flutter/material.dart';
 
-import 'bottom_navigation_bar_buttons/forum/forum.dart';
-import 'bottom_navigation_bar_buttons/profile/profile.dart';
-import 'bottom_navigation_bar_buttons/profile/profile.dart';
-import 'bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
+import '../bottom_navigation_bar_buttons/forum/forum.dart';
+import '../bottom_navigation_bar_buttons/profile/profile.dart';
+import '../bottom_navigation_bar_buttons/profile/profile.dart';
+import '../bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Index: 0
     HomePage(),
     //Index: 1,
-    SecondRoute(),
+    EventMainPage(),
     //Index: 2,
     Forum(),
     //Index: 3
