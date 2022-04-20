@@ -1,6 +1,7 @@
 import 'package:deggendorf_app/bin/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/barwidget.dart';
 
 class EventMainPage extends StatefulWidget {
   const EventMainPage({Key? key}) : super(key: key);
@@ -26,17 +27,17 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
   void initializeMyList() {
     myListToBeDisplayed = [
       sizedBox("Bar 1", "Mehr Informationen über Bar 1",
-          Icons.local_bar_rounded, 100, SecondRoute()),
+          Icons.local_bar_rounded, 100, BarWidget(barName: "Erster",)),
       sizedBox("Bar 2", "Mehr Informationen über Bar 1",
-          Icons.local_bar_rounded, 200, SecondRoute()),
+          Icons.local_bar_rounded, 200, BarWidget(barName: "Ostern",)),
       sizedBox("Bar 3", "Mehr Informationen über Bar 3",
-          Icons.local_bar_rounded, 100, SecondRoute()),
+          Icons.local_bar_rounded, 100, BarWidget(barName: "Hallo Welt",)),
       sizedBox("Bar 4", "Mehr Informationen über Bar 4",
-          Icons.local_bar_rounded, 100, SecondRoute()),
+          Icons.local_bar_rounded, 100, BarWidget(barName: "ITC1",)),
       sizedBox("Bar 5", "Mehr Informationen über Bar 5",
-          Icons.local_bar_rounded, 100, SecondRoute()),
+          Icons.local_bar_rounded, 100, BarWidget(barName: "THD",)),
       sizedBox("Bar 6", "Mehr Informationen über Bar 6",
-          Icons.local_bar_rounded, 100, SecondRoute()),
+          Icons.local_bar_rounded, 100, BarWidget(barName: "First Floor",)),
     ];
   }
 
@@ -102,14 +103,14 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
             onChanged: (bool? value) {
               //This piece of code can be used to change the value of the checkbox upon click.
               //It is commented because it is not used here.
-              setState(() {
+    /* setState(() {
                 _value = value!;
-              }
-    /*Navigator.push(
+              }*/
+    Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => navigateTo,
-                  )*/);
+                  ));
             },
           ), //CheckboxListTile
         ), //Container
