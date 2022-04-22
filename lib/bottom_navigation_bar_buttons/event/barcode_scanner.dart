@@ -9,24 +9,32 @@ class BarcodeScanner extends StatefulWidget {
   _BarcodeScannerWidget createState() => _BarcodeScannerWidget();
 }
 
-
 class _BarcodeScannerWidget extends State<BarcodeScanner> {
+
+
   @override
   Widget build(BuildContext context) {
+    var x = startBarcodeScanStream();
     return Scaffold(
       body: Container(
-          child: ElevatedButton(
-            onPressed: () => startBarcodeScanStream(),
-            child: Text("Press me!"),
-          )
-      ),
+        alignment: Alignment.center,
+          child: Column(
+            children: [
+              Text(x.toString()),
+              ElevatedButton(
+                onPressed:() {
+              Navigator.pop(context);
+                },
+                child: const Text("Return"),
+              ),
+            ],
+          )),
     );
   }
 
   Future<void> startBarcodeScanStream() async {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
-        '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
+            '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
         .listen((barcode) => print(barcode));
   }
-
 }

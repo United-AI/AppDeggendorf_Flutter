@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/imageslides.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/infobox_text.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/barcode_scanner.dart';
 
 
 class BarWidget extends StatefulWidget {
@@ -33,7 +34,13 @@ class _BarWidgetState extends State<BarWidget> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed:() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const BarcodeScanner()),
+          );
+        },
         backgroundColor: Colors.green,
         child: Icon(Icons.qr_code_scanner),
       )

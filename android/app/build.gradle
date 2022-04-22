@@ -36,7 +36,12 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.deggendorf_app"
-        minSdkVersion flutter.minSdkVersion
+
+        //the barcode scanner needs at least minSdkVersion 21 (Android 5.0),
+        // the default value is minSdkVersion flutter.minSdkVersion
+        // minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
+
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
