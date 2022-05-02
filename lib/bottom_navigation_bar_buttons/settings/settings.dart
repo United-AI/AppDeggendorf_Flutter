@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/settings/dropdownbutton.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/settings/standardsettingbutton.dart';
+import 'package:deggendorf_app/singin/singin.dart';
 
 
 class SettingScreen extends StatelessWidget {
@@ -26,7 +27,15 @@ class SettingScreen extends StatelessWidget {
           children: [
             StandardSettingButton(xOffset: 150, title: "Kennwort", label: "",),
             StandardSettingButton(xOffset: 127, title: "Benutzername", label: ""),
-            DropdownSettingButton()
+            DropdownSettingButton(),
+            TextButton(
+                onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SingIn()),);
+              },
+              child: Text("go to sing in")
+              )
           ],
         ),
       ),
