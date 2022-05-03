@@ -1,5 +1,5 @@
 import 'package:deggendorf_app/bin/main.dart';
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/weather/current_weather.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/weather/weather_block.dart';
 import 'package:flutter/cupertino.dart';
 
 class MyList {
