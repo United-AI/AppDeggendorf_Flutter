@@ -36,9 +36,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
 Container actualWeatherContainer(BuildContext context) {
   late WeatherData weather;
   return Container(
-    width: MediaQuery.of(context).size.width,
-    height: MediaQuery.of(context).size.height,
-    decoration: const BoxDecoration(
+    decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/chuttersnap-TSgwbumanuE-unsplash1.jpg'),
             fit: BoxFit.cover)),
@@ -60,10 +58,47 @@ Container actualWeatherContainer(BuildContext context) {
   );
 }
 
+InkWell actualWeatherContainerWithRoundedCorners(
+    BuildContext context, double borderRadius) {
+  late WeatherData weather;
+  return new InkWell(
+      onTap: () {
+        //If the widget tapped is the weather widget, then open weather page :)
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CurrentWeather(),
+            ));
+      },
+
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            image: DecorationImage(
+                image:
+                    AssetImage('assets/chuttersnap-TSgwbumanuE-unsplash1.jpg'),
+                fit: BoxFit.cover)),
+        child: FutureBuilder(
+          builder: (buildContext, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              weather = snapshot.data as WeatherData;
+              if (weather == null) {
+                return const Text("Error getting weather");
+              } else {
+                return weatherBox(weather);
+              }
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
+          future: getCurrentWeather(),
+        ),
+      ));
+}
+
 Widget weatherBox(WeatherData weather) {
-  return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+  return Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
     //padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -3,13 +3,12 @@ import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/weather/c
 import 'package:flutter/cupertino.dart';
 
 class MyList {
-
   List<Widget> myListToBeDisplayed = [];
-  List<Widget> myListToBeTappedOn = [];
+  List myListToBeTappedOn = [];
 
   MyList(BuildContext buildContext) {
     myListToBeDisplayed = [
-      actualWeatherContainer(buildContext),
+      Text("Input your widget here"),
       Text("Input your widget here"),
       Text("Input your widget here"),
       Text("Input your widget here"),
@@ -22,7 +21,7 @@ class MyList {
 
     myListToBeTappedOn = [
       CurrentWeather(),
-      SecondRoute(),
+      "SecondRoute()",
       SecondRoute(),
       SecondRoute(),
       SecondRoute(),
@@ -32,5 +31,4 @@ class MyList {
       SecondRoute(),
     ];
   }
-
 }
