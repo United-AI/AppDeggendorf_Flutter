@@ -1,18 +1,52 @@
 import 'package:deggendorf_app/bin/main.dart';
+import 'package:deggendorf_app/lib/database/app_database.dart';
+import 'package:deggendorf_app/lib/db_model/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/barwidget.dart';
 
-class EventMainPage extends StatefulWidget {
-  const EventMainPage({Key? key}) : super(key: key);
+class EventsPage extends StatefulWidget {
+  const EventsPage({Key? key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _EventsPageState createState() => _EventsPageState();
 }
 
-class _MyStatefulWidgetState extends State<EventMainPage> {
+class _EventsPageState extends State<EventsPage>
+{
   //This boolean variable is used for the checkboxes
   bool _value = false;
+
+  // Load all events
+  late List<Event> events = []; //= [new Event(name: "Es gibt zu diesem Zeitpunkt kein Event.", dateStart: new DateTime.now(), dateFinish: new DateTime.now(), location: "DEG")];
+  bool isLoading = false;
+
+  final appDatabase = AppDatabase.init();
+
+  @override
+  void initState()
+  {
+    super.initState();
+
+    refreshEvents();
+  }
+
+  @override
+  void dispose()
+  {
+    AppDatabase.instance.close();
+
+    super.dispose();
+  }
+
+  Future refreshEvents() async
+  {
+    setState(() => isLoading = true);
+
+    this.events = await AppDatabase.instance.readAllEvents();
+
+    setState(() => isLoading = false);
+  }
 
   /*This list contains the elements to be displayed on the event page.
   These elements were originally thought to be bars which once clicked upon
@@ -24,6 +58,7 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
 
   /*If you need to add a new item to the list, add it here.
   */
+  /*
   void initializeMyList() {
     myListToBeDisplayed = [
       sizedBox("Bar 1", "Mehr Informationen über Bar 1",
@@ -39,24 +74,34 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
       sizedBox("Bar 6", "Mehr Informationen über Bar 6",
           Icons.local_bar_rounded, 100, BarWidget(barName: "First Floor",)),
     ];
-  }
+  }*/
+
 
   @override
   Widget build(BuildContext context) {
-    initializeMyList();
+    //initializeMyList();
     return Scaffold(
       backgroundColor: Colors.blue[200],
       appBar: AppBar(
         title: Text("Eventname"),
         backgroundColor: Colors.green,
       ),
-      body: Container(
-        child: Center(
-          child: ListView(
-            children: myListToBeDisplayed,
-          ),
-        ),
+      body: ListView.builder(
+        itemCount: events.length!,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(events[index].name!),
+            trailing: PopupMenuButton(
+              itemBuilder: (ctx) =>
+              [
+                PopupMenuItem(child: Text("Delete")),
+                PopupMenuItem(child: Text("Edit")),
+              ],
+            ),
+          );
+        }, // itemBuilder
       ),
+
       //This is the floating button at the bottom right of the page.
       floatingActionButton: SpeedDial(
         //edit here to change the colour and opacity of the overlay, when the button is pressed.
@@ -78,12 +123,12 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
     );
   }
 
+
   //This sized box is used in the list myListToBeDisplayed
-  SizedBox sizedBox(String mainTitle, String subtitle, IconData iconData,
+  SizedBox sizedBox(String name, String dateStart, IconData iconData,
       double heightOfCheckBox, Widget navigateTo) {
     return SizedBox(
       height: heightOfCheckBox,
-
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -93,8 +138,8 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
             borderRadius: BorderRadius.circular(20),
           ), //BoxDecoration
           child: CheckboxListTile(
-            title: Text(mainTitle),
-            subtitle: Text(subtitle),
+            title: Text(EventFields.name),
+            subtitle: Text(EventFields.dateStart),
             secondary: Icon(iconData),
             activeColor: Colors.green,
             checkColor: Colors.white,
@@ -117,6 +162,4 @@ class _MyStatefulWidgetState extends State<EventMainPage> {
       ), //Padding
     );
   }
-
-
 }

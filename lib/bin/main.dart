@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //Index: 0
     HomePage(),
     //Index: 1,
-    EventMainPage(),
+    EventsPage(),
     //Index: 2,
     Forum(),
     //Index: 3
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'Konto',
+            label: 'Account',
             backgroundColor: Colors.brown,
           ),
         ],
@@ -121,7 +121,7 @@ class SecondRoute extends StatelessWidget {
         title: const Text('Second Route'),
       ),
       body: const Center(
-          child: Text("Diese Seite wurde noch nicht entwickelt!!!")),
+          child: Text("!!! This page is still in development !!!")),
     );
   }
 }
