@@ -12,27 +12,8 @@ class Forum extends StatefulWidget {
 class _ForumState extends State<Forum> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Forum"),
-      ),
-      body: Column(
-        children: <Widget>[
-          ForumFolder(
-            iconData: Icons.account_balance_outlined,
-            title: "Aufenthalt",
-          ),
-          ForumFolder(
-            iconData: Icons.account_box_outlined,
-            title: "Jobbörse",
-          ),
-          ForumFolder(
-            iconData: Icons.alternate_email,
-            title: "Allgemein",
-          )
-        ],
-      ),
-    );
+    return ForumFolder(
+        iconData: Icons.airplane_ticket_outlined, title: "title");
   }
 }
 

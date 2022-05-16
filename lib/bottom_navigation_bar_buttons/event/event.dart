@@ -1,9 +1,8 @@
-import 'package:deggendorf_app/bin/main.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/super_user_events/add_new_event_form.dart';
 import 'package:deggendorf_app/lib/database/app_database.dart';
 import 'package:deggendorf_app/lib/db_model/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/barwidget.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -12,38 +11,43 @@ class EventsPage extends StatefulWidget {
   _EventsPageState createState() => _EventsPageState();
 }
 
-class _EventsPageState extends State<EventsPage>
-{
+class ListOfEvents {
+  late List<Event> events;
+
+  ListOfEvents() {
+    events = [];
+  }
+}
+
+class _EventsPageState extends State<EventsPage> {
   //This boolean variable is used for the checkboxes
   bool _value = false;
 
   // Load all events
-  late List<Event> events = []; //= [new Event(name: "Es gibt zu diesem Zeitpunkt kein Event.", dateStart: new DateTime.now(), dateFinish: new DateTime.now(), location: "DEG")];
+  ListOfEvents listOfEvents =
+      new ListOfEvents(); //= [new Event(name: "Es gibt zu diesem Zeitpunkt kein Event.", dateStart: new DateTime.now(), dateFinish: new DateTime.now(), location: "DEG")];
   bool isLoading = false;
 
   final appDatabase = AppDatabase.init();
 
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
 
     refreshEvents();
   }
 
   @override
-  void dispose()
-  {
+  void dispose() {
     AppDatabase.instance.close();
 
     super.dispose();
   }
 
-  Future refreshEvents() async
-  {
+  Future refreshEvents() async {
     setState(() => isLoading = true);
 
-    this.events = await AppDatabase.instance.readAllEvents();
+    this.listOfEvents.events = await AppDatabase.instance.readAllEvents();
 
     setState(() => isLoading = false);
   }
@@ -76,7 +80,6 @@ class _EventsPageState extends State<EventsPage>
     ];
   }*/
 
-
   @override
   Widget build(BuildContext context) {
     //initializeMyList();
@@ -87,13 +90,12 @@ class _EventsPageState extends State<EventsPage>
         backgroundColor: Colors.green,
       ),
       body: ListView.builder(
-        itemCount: events.length!,
+        itemCount: listOfEvents.events.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(events[index].name!),
+            title: Text(listOfEvents.events[index].name),
             trailing: PopupMenuButton(
-              itemBuilder: (ctx) =>
-              [
+              itemBuilder: (ctx) => [
                 PopupMenuItem(child: Text("Delete")),
                 PopupMenuItem(child: Text("Edit")),
               ],
@@ -111,8 +113,13 @@ class _EventsPageState extends State<EventsPage>
         backgroundColor: Colors.green[700],
         children: [
           SpeedDialChild(
+              onTap: () {
+                //If the widget tapped is the weather widget, then open weather page :)
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddNewEvent(listOfEvents)));
+              },
               child: Icon(Icons.info),
-              label: 'Option 1',
+              label: 'Add new event',
               backgroundColor: Colors.red),
           SpeedDialChild(
               child: Icon(Icons.phone_android),
@@ -122,7 +129,6 @@ class _EventsPageState extends State<EventsPage>
       ),
     );
   }
-
 
   //This sized box is used in the list myListToBeDisplayed
   SizedBox sizedBox(String name, String dateStart, IconData iconData,
@@ -148,10 +154,10 @@ class _EventsPageState extends State<EventsPage>
             onChanged: (bool? value) {
               //This piece of code can be used to change the value of the checkbox upon click.
               //It is commented because it is not used here.
-    /* setState(() {
+              /* setState(() {
                 _value = value!;
               }*/
-    Navigator.push(
+              Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => navigateTo,
