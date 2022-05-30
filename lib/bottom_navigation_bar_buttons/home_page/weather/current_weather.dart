@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/weather/background_weather_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
@@ -34,14 +35,18 @@ class _CurrentWeatherState extends State<CurrentWeather> {
 }
 
 Container actualWeatherContainer(BuildContext context) {
-  late WeatherData weather;
+  late WeatherData weather = new WeatherData(
+      temperature: 0.0,
+      feelsLike: 0.0,
+      low: 0.0,
+      high: 0.0,
+      description:
+          "This is the initialized value. An error has definitely occurred");
+  String weatherDescription = "";
+
   return Container(
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
-    decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/chuttersnap-TSgwbumanuE-unsplash1.jpg'),
-            fit: BoxFit.cover)),
     child: FutureBuilder(
       builder: (buildContext, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -49,6 +54,7 @@ Container actualWeatherContainer(BuildContext context) {
           if (weather == null) {
             return const Text("Error getting weather");
           } else {
+            weatherDescription = "${weather.description}";
             return weatherBox(weather);
           }
         } else {
@@ -61,31 +67,44 @@ Container actualWeatherContainer(BuildContext context) {
 }
 
 Widget weatherBox(WeatherData weather) {
-  return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-    //padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Text("${weather.temperature}°C",
-            style: GoogleFonts.dancingScript(
-                fontSize: 65,
-                color: Color.fromRGBO(0, 0, 139, 0.7),
-                fontWeight: FontWeight.bold)),
-        Text("${weather.description}",
-            style: GoogleFonts.pacifico(
-                fontSize: 30, color: Color.fromRGBO(0, 0, 139, 0.7)))
-      ],
-    ),
-    Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Text("Feels:${weather.feelsLike}°C",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15))),
-    Text("Highest: ${weather.high}°C    Lowest: ${weather.low}°C",
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-  ]);
+  return Flexible(
+      flex: 1,
+      child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.green),
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                  image: new BackgroundImage("${weather.description}").currentWeatherBackground(),
+                  fit: BoxFit.cover)),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+            //padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+            Flexible(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text("${weather.temperature}°C",
+                        style: GoogleFonts.dancingScript(
+                            fontSize: 65,
+                            color: Color.fromRGBO(0, 0, 139, 0.7),
+                            fontWeight: FontWeight.bold)),
+                    Text("${weather.description}",
+                        style: GoogleFonts.pacifico(
+                            fontSize: 30,
+                            color: Color.fromRGBO(0, 0, 139, 0.7)))
+                  ],
+                )),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Text("Feels:${weather.feelsLike}°C",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15))),
+            Text("Highest: ${weather.high}°C    Lowest: ${weather.low}°C",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          ])));
 }
 
 Future getCurrentWeather() async {

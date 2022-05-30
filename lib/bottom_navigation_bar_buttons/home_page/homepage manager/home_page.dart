@@ -67,19 +67,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return new InkWell(
-                    onTap: () {
-                        //If the widget tapped is the weather widget, then open weather page :)
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  new MyList(context).myListToBeTappedOn[index],
-                            ));
-                    },
-                    child: Container(
-                      height: 125,
-                      child: new MyList(context).myListToBeDisplayed[index],
-                    ));
+                  onTap: () {
+                    //If the widget tapped is the weather widget, then open weather page :)
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              new MyList(context).myListToBeTappedOn[index],
+                        ));
+                  },
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 125,
+                        child: new MyList(context).myListToBeDisplayed[index],
+                      ) //Container
+                      ),
+                );
               },
               childCount: new MyList(context).myListToBeDisplayed.length,
             ),
