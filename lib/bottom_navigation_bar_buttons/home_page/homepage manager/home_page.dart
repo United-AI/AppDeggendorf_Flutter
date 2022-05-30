@@ -59,37 +59,42 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ],
         ),
       ),
-      body: CustomScrollView(
-        center: centerKey,
-        slivers: <Widget>[
-          SliverList(
-            key: centerKey,
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return new InkWell(
-                  onTap: () {
-                    //If the widget tapped is the weather widget, then open weather page :)
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              new MyList(context).myListToBeTappedOn[index],
-                        ));
+      body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("degg_blurred.jpg"), fit: BoxFit.cover)),
+          child: CustomScrollView(
+            center: centerKey,
+            slivers: <Widget>[
+              SliverList(
+                key: centerKey,
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return new InkWell(
+                      onTap: () {
+                        //If the widget tapped is the weather widget, then open weather page :)
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  new MyList(context).myListToBeTappedOn[index],
+                            ));
+                      },
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 125,
+                            child:
+                                new MyList(context).myListToBeDisplayed[index],
+                          ) //Container
+                          ),
+                    );
                   },
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 125,
-                        child: new MyList(context).myListToBeDisplayed[index],
-                      ) //Container
-                      ),
-                );
-              },
-              childCount: new MyList(context).myListToBeDisplayed.length,
-            ),
-          ),
-        ],
-      ),
+                  childCount: new MyList(context).myListToBeDisplayed.length,
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
