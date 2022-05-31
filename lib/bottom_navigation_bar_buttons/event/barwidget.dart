@@ -1,7 +1,7 @@
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/imageslides.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/infobox_text.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/qr_scanner.dart';
 
 class BarWidget extends StatefulWidget {
   const BarWidget({Key? key, required this.barName}) : super(key: key);
@@ -33,7 +33,10 @@ class _BarWidgetState extends State<BarWidget> {
             )),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            QrScanner();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => QRViewExample()),
+            );
           },
           backgroundColor: Colors.green,
           child: Icon(Icons.qr_code_scanner),
