@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/imageslides.dart';
-import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/infobox_text.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/event_container/imageslides.dart';
+import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/event_container/infobox_text.dart';
 
 
 class BarWidget extends StatefulWidget {

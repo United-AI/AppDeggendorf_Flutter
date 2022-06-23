@@ -1,3 +1,4 @@
+import 'package:deggendorf_app/backend/roll_regulation.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/event/event.dart';
 import 'package:deggendorf_app/bottom_navigation_bar_buttons/home_page/homepage%20manager/home_page.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  RollManager rollManager = new RollManager();
+
+  check_permissions(){
+    if (rollManager.getPermissionToSuperUser()){
+      return EventsPage();
+    }else {
+      return
+    }
+  }
 
   /*
   Here is the list where the widgets for the bottom navigation bar are
